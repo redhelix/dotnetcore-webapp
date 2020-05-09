@@ -33,16 +33,16 @@ jobs:
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }} 
     
-      # CHECK FOR VULNS VIA SNYK
-      - name: Snyk
-        uses: snyk/actions/dotnet@master
-    
-        
+
       # Run dotnet build and publish
       - name: dotnet build and publish
         run: |
-          dotnet build --configuration Release
+          dotnet build --configuration Release          
           dotnet publish -c Release -o '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/myapp' 
+      
+      # CHECK FOR VULNS VIA SNYK
+      - name: Snyk
+        uses: snyk/actions/dotnet@master
           
       # Deploy to Azure Web apps
       - name: 'Run Azure webapp deploy action using publish profile credentials'
