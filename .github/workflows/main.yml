@@ -18,6 +18,7 @@ env:
   AZURE_WEBAPP_NAME: 'al-dc416-devsecops-web-app'    # set this to your application's name
   AZURE_WEBAPP_PACKAGE_PATH: '.'      # set this to the path to your web app project, defaults to the repository root
   DOTNET_VERSION: '3.1.100'           # set this to the dot net version to use
+  SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }} #SYNK 
 
 jobs:
   build-and-deploy:
@@ -35,6 +36,7 @@ jobs:
       # CHECK FOR VULNS VIA SNYK
       - name: Snyk
         uses: snyk/actions@0.1.1
+    
         
       # Run dotnet build and publish
       - name: dotnet build and publish
